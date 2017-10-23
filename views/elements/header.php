@@ -60,7 +60,7 @@
 							<?php if($user->isAdmin()) { ?>
 								<li><a href="<?php echo BASE_URL; ?>addpost/">Add Blog Post</a></li>
 							<?php } ?>
-							<li><a href="<?php echo BASE_URL; ?>/login/logout/">Log Out</a></li>
+							<li><a href="<?php echo BASE_URL; ?>login/logout/">Log Out</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -70,6 +70,23 @@
 					<li><a href="<?php echo BASE_URL?>register/">Register</a></li>
 				</ul>
 			<?php } ?>
+			<script src="<?php echo BASE_URL; ?>/views/js/jquery.js"></script>
+			<script>
+				$(document).ready(function() {
+					var navsObj = $('.nav li');
+					var navs = $.map(navsObj, function(value, index) {
+						return value;
+					});
+					var hrefs = [];
+					navs.forEach(function(nav, index) {
+						var kid = $(nav).children().filter('a');
+						$(nav).removeClass('active');
+						if(kid.attr('href') == '<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>') {
+							$(nav).addClass('active');
+						}
+					});
+				});
+			</script>
           </div><!--/.nav-collapse -->
         </div>
       </div>
